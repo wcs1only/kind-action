@@ -57,17 +57,13 @@ main() {
     local cache_dir="$RUNNER_TOOL_CACHE/kind/$version/$arch"
 
     local kind_dir="$cache_dir/kind/bin/"
-    if [[ ! -x "$kind_dir/kind" ]]; then
-        install_kind
-    fi
+    install_kind
 
     echo 'Adding kind directory to PATH...'
     echo "$kind_dir" >> "$GITHUB_PATH"
 
     local kubectl_dir="$cache_dir/kubectl/bin/"
-    if [[ ! -x "$kubectl_dir/kubectl" ]]; then
-        install_kubectl
-    fi
+    install_kubectl
 
     echo 'Adding kubectl directory to PATH...'
     echo "$kubectl_dir" >> "$GITHUB_PATH"
@@ -159,7 +155,7 @@ install_kind() {
 
     mkdir -p "$kind_dir"
 
-    curl -sSLo "$kind_dir/kind" "https://github.com/kubernetes-sigs/kind/releases/download/$version/kind-linux-amd64"
+    curl -sSLo "$kind_dir/kind" "https://github.com/kubernetes-sigs/kind/releases/download/$version/kind-darwin-amd64"
     chmod +x "$kind_dir/kind"
 }
 
@@ -168,7 +164,7 @@ install_kubectl() {
 
     mkdir -p "$kubectl_dir"
 
-    curl -sSLo "$kubectl_dir/kubectl" "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl"
+    curl -sSLo "$kubectl_dir/kubectl" "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/darwin/amd64/kubectl"
     chmod +x "$kubectl_dir/kubectl"
 }
 
